@@ -30,6 +30,15 @@ Manage your prompts and notes from the terminal. Requires `npm install -g pnote`
 - `pnote snippet add <id>` - add snippet from stdin
 - `pnote tags rename "old" "new"` - rename tag
 
+**Agent Skills Sync (v0.2.0+):**
+- `pnote skills` - list all skills in cloud
+- `pnote skills pull` - download all skills to ~/.claude/skills/
+- `pnote skills pull <name>` - download a specific skill
+- `pnote skills push <dir>` - upload a local skill directory to cloud
+
+Skills are notes with `note_type=skill` and title format `skill-name/filename.md`.
+They sync to `~/.claude/skills/<skill-name>/` for use with Claude Code.
+
 **PIN Protection:**
 For protected notes, set `PNOTE_PIN` env var or use `-p <pin>` flag.
 

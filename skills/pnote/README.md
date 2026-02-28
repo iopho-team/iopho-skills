@@ -67,6 +67,9 @@ This skill wraps the `pnote` CLI to let Claude help you:
 | `pnote search <query>` | Search notes and snippets |
 | `pnote snippet copy <id>` | Copy snippet to clipboard |
 | `pnote tags` | List all tags |
+| `pnote skills` | List skills in cloud |
+| `pnote skills pull` | Download skills to `~/.claude/skills/` |
+| `pnote skills push <dir>` | Upload a local skill to cloud |
 
 See `pnote --help` for full documentation.
 
