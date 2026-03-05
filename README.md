@@ -1,4 +1,4 @@
-# iopho-team/iopho-skills
+# iopho-skills
 
 AI agent skills for [iopho](https://github.com/iopho-team) products. Works with Claude Code, Cursor, Windsurf, and [40+ other agents](https://skills.sh/).
 
