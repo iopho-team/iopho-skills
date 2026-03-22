@@ -4,7 +4,7 @@ description: Reverse-engineer videos into .storyboard.md files for AI video rege
 allowed-tools: Bash(python3 *), Bash(ffmpeg *), Bash(pip *)
 user-invocable: true
 argument-hint: <video_path> [output_path] [--no-frames] [--model gemini-2.0-flash]
-updated: "2026-02-27"
+updated: "2026-03-13"
 ---
 
 # iopho-analyzing-videos — Video → .storyboard.md Reverse Engineering
