@@ -1,14 +1,25 @@
 # iopho-skills
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 AI agent skills for [iopho](https://github.com/iopho-team) products. Works with Claude Code, Cursor, Windsurf, and [40+ other agents](https://skills.sh/).
 
 ## Available Skills
 
-### Video Production Pipeline
+### Video Production — Orchestrator
+
+Start here. The director skill guides you through the full pipeline and routes to all other skills.
 
 | Skill | Description |
 |-------|-------------|
 | [iopho-video-director](skills/iopho-video-director/) | Master orchestrator: 4-phase pipeline (Context → Storyboard → Production → Visual QA)<br>`npx skills add iopho-team/iopho-skills --skill iopho-video-director` · _updated 2026-03-19_ |
+
+### Video Production — Specialized Skills
+
+Individual skills for each stage of the pipeline. Can be used standalone or invoked by the orchestrator.
+
+| Skill | Description |
+|-------|-------------|
 | [iopho-product-context](skills/iopho-product-context/) | Interactive intake questionnaire → context.md (product/audience/brand)<br>`npx skills add iopho-team/iopho-skills --skill iopho-product-context` · _updated 2026-03-19_ |
 | [iopho-searching-videos](skills/iopho-searching-videos/) | Search videos across YouTube, Bilibili, and other platforms without downloading<br>`npx skills add iopho-team/iopho-skills --skill iopho-searching-videos` · _updated 2026-02-27_ |
 | [iopho-getting-videos](skills/iopho-getting-videos/) | Download video, audio, subtitles, and metadata from 1800+ platforms<br>`npx skills add iopho-team/iopho-skills --skill iopho-getting-videos` · _updated 2026-02-27_ |
