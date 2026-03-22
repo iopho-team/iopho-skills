@@ -6,6 +6,15 @@ AI agent skills for [iopho](https://github.com/iopho-team) products. Works with 
 
 ## Available Skills
 
+### iopho Apps
+
+Skills for iopho's own products — reading, notes, and knowledge management.
+
+| Skill | Description |
+|-------|-------------|
+| [reedle](skills/reedle/) | Intelligent reading library CLI — save/read articles, YouTube & Bilibili transcripts, semantic search, highlights, flashcard decks<br>`npx skills add iopho-team/iopho-skills --skill reedle` · _updated 2026-03-22_ |
+| [pnote](skills/pnote/) | [PromptNote](https://promptnoteapp.com/) CLI for managing prompts, notes, and snippets<br>`npx skills add iopho-team/iopho-skills --skill pnote` · _updated 2026-03-22_ |
+
 ### Video Production — Orchestrator
 
 Start here. The director skill guides you through the full pipeline and routes to all other skills.
@@ -28,12 +37,6 @@ Individual skills for each stage of the pipeline. Can be used standalone or invo
 | [iopho-seedance-prompts](skills/iopho-seedance-prompts/) | 即梦 Seedance 2.0 prompt engineering — CN-first, 10 capability modes<br>`npx skills add iopho-team/iopho-skills --skill iopho-seedance-prompts` · _updated 2026-02-28_ |
 | [iopho-voiceover-tts](skills/iopho-voiceover-tts/) | Generate voiceover with ElevenLabs/MiniMax/Edge TTS, voice audition, multi-lang assembly<br>`npx skills add iopho-team/iopho-skills --skill iopho-voiceover-tts` · _updated 2026-03-19_ |
 | [iopho-audio-director](skills/iopho-audio-director/) | BGM + VO + SFX assembly with ducking, Suno prompt templates, FFmpeg export<br>`npx skills add iopho-team/iopho-skills --skill iopho-audio-director` · _updated 2026-03-19_ |
-
-### Other Tools
-
-| Skill | Description |
-|-------|-------------|
-| [pnote](skills/pnote/) | [PromptNote](https://promptnoteapp.com/) CLI for managing prompts, notes, and snippets<br>`npx skills add iopho-team/iopho-skills --skill pnote` · _updated 2026-03-22_ |
 
 ## Quick Install
 

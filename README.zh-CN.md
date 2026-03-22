@@ -6,6 +6,15 @@
 
 ## 可用技能
 
+### iopho 产品应用
+
+iopho 自有产品的配套技能——阅读、笔记与知识管理。
+
+| 技能 | 说明 |
+|------|------|
+| [reedle](skills/reedle/) | 智能阅读库 CLI——保存/阅读文章、YouTube 与 Bilibili 字幕提取、语义搜索、划线高亮、闪卡复习<br>`npx skills add iopho-team/iopho-skills --skill reedle` · _更新于 2026-03-22_ |
+| [pnote](skills/pnote/) | [PromptNote](https://promptnoteapp.com/) CLI——管理提示词、笔记与代码片段<br>`npx skills add iopho-team/iopho-skills --skill pnote` · _更新于 2026-03-22_ |
+
 ### 视频制作 — 主编导技能
 
 从这里开始。主编导技能将引导你完成完整的制作流程，并自动调用其他所有技能。
@@ -28,12 +37,6 @@
 | [iopho-seedance-prompts](skills/iopho-seedance-prompts/) | 即梦 Seedance 2.0 提示词工程——中文优先，覆盖 10 种能力模式<br>`npx skills add iopho-team/iopho-skills --skill iopho-seedance-prompts` · _更新于 2026-02-28_ |
 | [iopho-voiceover-tts](skills/iopho-voiceover-tts/) | 使用 ElevenLabs / MiniMax / Edge TTS 生成配音，支持多语言、声音试听与多段拼接<br>`npx skills add iopho-team/iopho-skills --skill iopho-voiceover-tts` · _更新于 2026-03-19_ |
 | [iopho-audio-director](skills/iopho-audio-director/) | BGM + 配音 + 音效混音，含 Suno 提示词模板与 FFmpeg 音量闪避导出<br>`npx skills add iopho-team/iopho-skills --skill iopho-audio-director` · _更新于 2026-03-19_ |
-
-### 其他工具
-
-| 技能 | 说明 |
-|------|------|
-| [pnote](skills/pnote/) | [PromptNote](https://promptnoteapp.com/) CLI——管理提示词、笔记与代码片段<br>`npx skills add iopho-team/iopho-skills --skill pnote` · _更新于 2026-03-22_ |
 
 ## 快速安装
 
