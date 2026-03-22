@@ -4,6 +4,7 @@ description: Search videos across YouTube, Bilibili, and other platforms without
 allowed-tools: Bash(yt-dlp *), Bash(python3 *)
 user-invocable: true
 argument-hint: <query> [--platform youtube|bilibili|all] [--limit N] [--json]
+updated: "2026-02-27"
 ---
 
 # iopho-searching-videos — Cross-Platform Video Search

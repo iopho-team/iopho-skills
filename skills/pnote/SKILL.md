@@ -4,6 +4,7 @@ description: pnote - The PromptNote CLI for managing prompts, notes, and snippet
 allowed-tools: Bash(pnote *), mcp__promptnote__check_pin_status, mcp__promptnote__create_note, mcp__promptnote__create_snippet, mcp__promptnote__delete_note, mcp__promptnote__get_note, mcp__promptnote__get_shared_tag_notes, mcp__promptnote__get_snippet, mcp__promptnote__list_notes, mcp__promptnote__list_protected_notes, mcp__promptnote__list_shared_notes, mcp__promptnote__list_shared_tags, mcp__promptnote__list_snippets, mcp__promptnote__list_tags, mcp__promptnote__merge_tags, mcp__promptnote__rename_tag, mcp__promptnote__search, mcp__promptnote__toggle_favorite, mcp__promptnote__update_note, mcp__promptnote__update_snippet
 user-invocable: true
 argument-hint: <command> [options]
+updated: "2026-03-22"
 ---
 
 # pnote — PromptNote CLI

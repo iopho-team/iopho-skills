@@ -4,6 +4,7 @@ description: reedle - The Reedle CLI for managing your intelligent reading libra
 allowed-tools: Bash(reedle *), mcp__reedle__reedle_list_articles, mcp__reedle__reedle_get_article, mcp__reedle__reedle_get_article_content, mcp__reedle__reedle_create_article, mcp__reedle__reedle_update_article, mcp__reedle__reedle_delete_article, mcp__reedle__reedle_search_articles, mcp__reedle__reedle_search_semantic, mcp__reedle__reedle_find_similar_articles, mcp__reedle__reedle_list_tags, mcp__reedle__reedle_tag_article, mcp__reedle__reedle_list_lists, mcp__reedle__reedle_get_list, mcp__reedle__reedle_list_highlights, mcp__reedle__reedle_get_highlight, mcp__reedle__reedle_list_comments, mcp__reedle__reedle_save, mcp__reedle__reedle_save_youtube, mcp__reedle__reedle_save_bilibili, mcp__reedle__reedle_read, mcp__reedle__reedle_read_youtube, mcp__reedle__reedle_read_bilibili, mcp__reedle__reedle_get_processing_status, mcp__reedle__reedle_get_credit_balance, mcp__reedle__reedle_list_decks, mcp__reedle__reedle_list_cards_due, mcp__reedle__reedle_get_study_stats
 user-invocable: true
 argument-hint: <command> [options]
+updated: "2026-03-22"
 ---
 
 # reedle — Intelligent Reading Companion CLI

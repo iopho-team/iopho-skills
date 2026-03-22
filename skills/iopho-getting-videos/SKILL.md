@@ -4,6 +4,7 @@ description: Download video, audio, subtitles, and metadata from YouTube, Bilibi
 allowed-tools: Bash(yt-dlp *), Bash(python3 *), Bash(ffmpeg *), Bash(BBDown *), Bash(lux *), Bash(you-get *)
 user-invocable: true
 argument-hint: <url> [--mode video|audio|transcript|metadata|all] [--quality best|720p|480p] [--output DIR]
+updated: "2026-02-27"
 ---
 
 # iopho-getting-videos — Cross-Platform Video/Audio/Subtitle Downloader
