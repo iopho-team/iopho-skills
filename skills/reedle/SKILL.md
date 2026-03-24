@@ -4,7 +4,7 @@ description: reedle - The Reedle CLI for managing your intelligent reading libra
 allowed-tools: Bash(reedle *), mcp__reedle__reedle_list_articles, mcp__reedle__reedle_get_article, mcp__reedle__reedle_get_article_content, mcp__reedle__reedle_create_article, mcp__reedle__reedle_update_article, mcp__reedle__reedle_delete_article, mcp__reedle__reedle_search_articles, mcp__reedle__reedle_search_semantic, mcp__reedle__reedle_find_similar_articles, mcp__reedle__reedle_list_tags, mcp__reedle__reedle_tag_article, mcp__reedle__reedle_list_lists, mcp__reedle__reedle_get_list, mcp__reedle__reedle_list_highlights, mcp__reedle__reedle_get_highlight, mcp__reedle__reedle_list_comments, mcp__reedle__reedle_save, mcp__reedle__reedle_save_youtube, mcp__reedle__reedle_save_bilibili, mcp__reedle__reedle_read, mcp__reedle__reedle_read_youtube, mcp__reedle__reedle_read_bilibili, mcp__reedle__reedle_get_processing_status, mcp__reedle__reedle_get_credit_balance, mcp__reedle__reedle_list_decks, mcp__reedle__reedle_list_cards_due, mcp__reedle__reedle_get_study_stats
 user-invocable: true
 argument-hint: <command> [options]
-updated: "2026-03-24"
+updated: "2026-03-24-v0.3.0"
 ---
 
 # reedle — Intelligent Reading Companion CLI
@@ -157,20 +157,35 @@ reedle lists                               # List all reading lists
 
 ---
 
-## Browse TUI (fzf)
+## Browse TUI
 
-Interactive two-pane browser powered by `fzf`. Requires `fzf` in PATH; `glow` or `bat` enhance the preview.
+Full-screen 3-pane terminal interface. No external tools required — markdown rendering is bundled with `reedle-cli`.
 
 ```bash
-reedle browse                              # Open interactive article browser
+reedle browse                              # All articles
+reedle browse --starred                    # Starred only
+reedle browse -t research                  # Filter by tag
 ```
 
-**Keyboard shortcuts:**
-- `Enter` — open in web browser
-- `Ctrl-O` — also opens in browser
-- `Esc / Ctrl-C` — exit
+**Layout:** sidebar (views/tags/lists) | article list | preview pane, with fullscreen reader on Enter.
 
-**Install fzf:** `brew install fzf` / `apt install fzf` / `scoop install fzf`
+**Key map:**
+
+| Key | Action |
+|---|---|
+| `j`/`k` | Navigate in focused pane |
+| `Tab` | Cycle focus: sidebar → list → preview |
+| `1`/`2`/`3` | Jump to sidebar / list / preview |
+| `Enter` | Open fullscreen reader |
+| `/` | Live search (title, site, excerpt, tags) |
+| `s` | Toggle star |
+| `a` | Toggle archive |
+| `d` `d` | Delete (press twice to confirm, `Esc` cancels) |
+| `t` | Add tag (input prompt) |
+| `o` | Open in browser |
+| `r` | Refresh from API |
+| `b` / `Esc` / `q` | Exit reader back to list |
+| `q` | Quit TUI (from list view) |
 
 ---
 
