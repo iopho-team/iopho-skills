@@ -4,7 +4,7 @@ description: reedle - The Reedle CLI for managing your intelligent reading libra
 allowed-tools: Bash(reedle *), mcp__reedle__reedle_list_articles, mcp__reedle__reedle_get_article, mcp__reedle__reedle_get_article_content, mcp__reedle__reedle_create_article, mcp__reedle__reedle_update_article, mcp__reedle__reedle_delete_article, mcp__reedle__reedle_search_articles, mcp__reedle__reedle_search_semantic, mcp__reedle__reedle_find_similar_articles, mcp__reedle__reedle_list_tags, mcp__reedle__reedle_tag_article, mcp__reedle__reedle_list_lists, mcp__reedle__reedle_get_list, mcp__reedle__reedle_list_highlights, mcp__reedle__reedle_get_highlight, mcp__reedle__reedle_list_comments, mcp__reedle__reedle_save, mcp__reedle__reedle_save_youtube, mcp__reedle__reedle_save_bilibili, mcp__reedle__reedle_read, mcp__reedle__reedle_read_youtube, mcp__reedle__reedle_read_bilibili, mcp__reedle__reedle_get_processing_status, mcp__reedle__reedle_get_credit_balance, mcp__reedle__reedle_list_decks, mcp__reedle__reedle_list_cards_due, mcp__reedle__reedle_get_study_stats
 user-invocable: true
 argument-hint: <command> [options]
-updated: "2026-03-22"
+updated: "2026-03-24"
 ---
 
 # reedle — Intelligent Reading Companion CLI
@@ -63,7 +63,7 @@ Override with env var: `REEDLE_TOKEN=rdk_xxx reedle list`
 
 ## Save to Library
 
-Saves content permanently to the user's Reedle library. Full LLM pipeline runs (fetch → parse → embed). Processing is async — use `reedle get <id>` or `reedle_get_processing_status` to check when ready.
+Saves content permanently to the user's Reedle library. Full LLM pipeline runs (fetch → parse → embed). Processing is async — use `reedle show <id>` or `reedle_get_processing_status` to check when ready.
 
 ```bash
 reedle save <url>                          # Save a web article
@@ -116,9 +116,23 @@ reedle list --list <list-id>              # Filter by list
 reedle list --starred                      # Starred only
 reedle list --status ready                 # Filter by status
 reedle list -n 100                         # Increase limit (default: 50)
-reedle get <id>                            # Get article metadata
-reedle get <id> --content                  # Get full article text (markdown)
+reedle show <id>                           # Show article metadata
+reedle cat <id>                            # Output full article text to stdout (pipe-friendly)
 reedle open <id>                           # Open in browser
+```
+
+---
+
+## Actions
+
+```bash
+reedle star <id>                           # Star an article
+reedle unstar <id>                         # Unstar an article
+reedle archive <id>                        # Archive an article
+reedle unarchive <id>                      # Unarchive an article
+reedle delete <id> --force                 # Delete (--force required to confirm)
+reedle tag <id> <tag>                      # Add a tag
+reedle untag <id> <tag>                    # Remove a tag
 ```
 
 ---
@@ -140,6 +154,23 @@ reedle search "topic" --json | jq '.'     # JSON output for scripting
 reedle tags                                # List all tags with counts
 reedle lists                               # List all reading lists
 ```
+
+---
+
+## Browse TUI (fzf)
+
+Interactive two-pane browser powered by `fzf`. Requires `fzf` in PATH; `glow` or `bat` enhance the preview.
+
+```bash
+reedle browse                              # Open interactive article browser
+```
+
+**Keyboard shortcuts:**
+- `Enter` — open in web browser
+- `Ctrl-O` — also opens in browser
+- `Esc / Ctrl-C` — exit
+
+**Install fzf:** `brew install fzf` / `apt install fzf` / `scoop install fzf`
 
 ---
 
@@ -182,7 +213,8 @@ reedle read https://youtube.com/watch?v=xxx --youtube --save
 
 ### Pipe article content to another tool
 ```bash
-reedle get <id> --content | wc -w         # Word count
+reedle cat <id> | wc -w                   # Word count
+reedle cat <id> | glow                    # Render markdown in terminal
 reedle read <url> | head -50              # Preview before deciding to save
 reedle read <url> --json | jq '.content'  # Extract content field
 ```
