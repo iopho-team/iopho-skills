@@ -76,6 +76,8 @@ This skill wraps the `pnote` CLI to let Claude help you:
 | `pnote skills pull <name>` | Pull a specific skill globally |
 | `pnote skills pull --project` | Pull project-level (`.agents/skills/` + `.claude/skills/` etc.) |
 | `pnote skills push <dir>` | Upload a local skill to cloud |
+| `pnote skills diff [name]` | Compare local skill files with the cloud |
+| `pnote skills scan` | Read-only inventory of local skills (drift, dangling links, cleanup hints) |
 
 See `pnote --help` for full documentation.
 

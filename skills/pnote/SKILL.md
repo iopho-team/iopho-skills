@@ -4,7 +4,7 @@ description: pnote - The PromptNote CLI for managing prompts, notes, and snippet
 allowed-tools: Bash(pnote *), mcp__promptnote__check_pin_status, mcp__promptnote__create_note, mcp__promptnote__create_snippet, mcp__promptnote__delete_note, mcp__promptnote__get_note, mcp__promptnote__get_shared_tag_notes, mcp__promptnote__get_snippet, mcp__promptnote__list_notes, mcp__promptnote__list_protected_notes, mcp__promptnote__list_shared_notes, mcp__promptnote__list_shared_tags, mcp__promptnote__list_snippets, mcp__promptnote__list_tags, mcp__promptnote__merge_tags, mcp__promptnote__rename_tag, mcp__promptnote__search, mcp__promptnote__toggle_favorite, mcp__promptnote__update_note, mcp__promptnote__update_snippet
 user-invocable: true
 argument-hint: <command> [options]
-updated: "2026-03-22"
+updated: "2026-10-09"
 ---
 
 # pnote — PromptNote CLI
@@ -53,10 +53,12 @@ pnote notes --pinned                    # Show only pinned notes
 pnote notes --deleted                   # Show deleted notes
 pnote notes --protected                 # Show only PIN-protected notes
 pnote notes --search "query"            # Search by title
-pnote notes --limit 20                  # Limit results (default: 50)
+pnote notes --limit 20                  # Limit results (default: 50; a notice on stderr says when more exist)
+pnote notes --offset 50                 # Next page
+pnote notes --all                       # Every matching note (ignores --limit)
 
 # Read
-pnote notes get <id>                    # Get note + all snippet versions
+pnote notes get <id>                    # Get note + all snippet versions (full id or the 8-char short id from listings)
 pnote notes get <id> --latest           # Get note + latest snippet only
 
 # Create & manage
@@ -138,16 +140,18 @@ Protected notes encrypt content server-side. PIN is set in PromptNote app → Se
 1. `-p <pin>` flag — direct (⚠️ visible in shell history)
 2. `--pin-stdin` — first line of stdin
 3. `PNOTE_PIN` env var — **recommended for agents and automation**
-4. Session cache — 5-min TTL in `$TMPDIR/pnote-pin-<uid>`
-5. Interactive prompt — TTY only; 3 attempts; hidden input
-6. Fails gracefully — error: "PIN required but not provided. Use -p <pin> or set PNOTE_PIN environment variable."
+4. Session cache — 5-min TTL, written whenever a PIN successfully unlocks a note
 
-**In agent/non-TTY context** — step 5 is skipped. Always use `PNOTE_PIN`:
+If none applies and a command actually reaches a protected note, a TTY run prompts on demand (hidden input, 3 attempts). A non-TTY run never prompts: it exits with **code 5 (`PIN_REQUIRED`)**, distinct from code 3 (not found). With `--json`, a locked note is reported as `"locked": true` plus a `"reason"` — its content is unknown, never shown as empty.
+
+**In agent/non-TTY context**, always use `PNOTE_PIN`:
 ```bash
 PNOTE_PIN=1234 pnote notes --protected
 PNOTE_PIN=1234 pnote notes get <protected-note-id>
 echo "1234" | pnote notes get <id> --pin-stdin
 ```
+
+**Writing to protected notes:** adding or updating a snippet of a PIN-protected note from CLI/MCP is refused (HTTP 403) — content would otherwise be stored unencrypted. Unlock or unprotect it in the PromptNote app first.
 
 **Check PIN status:**
 ```bash
@@ -161,22 +165,29 @@ pnote pin list            # List protected notes (metadata only, no content)
 
 ## Agent Skills Sync
 
-Notes with `note_type=skill` and title `skill-name/filename.md` are agent skill files.
+A skill is a note with `note_type=skill`; each file is one note titled `skill-name/relative/path.md`. Any note can be a skill — `SKILL.md` frontmatter is recommended, not required.
 
 ```bash
 pnote skills                            # List skills in cloud
-pnote skills pull                       # Pull all globally (~/.agents/skills/ + symlinks)
-pnote skills pull <name>                # Pull a specific skill globally
-pnote skills pull --project             # Pull project-level (.agents/skills/ + .claude/skills/ etc.)
-pnote skills pull --project <name>      # Pull specific skill project-level
+pnote skills scan                       # Read-only inventory of local skills: drift, dangling links, cleanup hints
+pnote skills scan --usage               # + 30-day usage counts from local agent session logs
+pnote skills scan --path ~/Code         # Also deep-scan a directory (agent-unopened repos are not scanned by default)
+pnote skills diff [name]                # Local vs cloud: added / deleted / modified / unchanged / cloud-empty / cloud-locked
+pnote skills pull [name]                # Pull globally (~/.agents/skills/ + symlinks)
+pnote skills pull --project [name]      # Pull project-level (.agents/skills/ + .claude/skills/ etc.)
 pnote skills pull --dry-run             # Preview without writing
-pnote skills push <dir>                 # Upload local skill directory to cloud
+pnote skills pull --force               # Overwrite conflicts; originals backed up to ~/.cache/pnote/skill-backups/<ts>/
+pnote skills push <dir>                 # Upload a local skill directory (appends versions, never deletes cloud history)
+pnote skills push <name> --file <path>  # Push a single file
+pnote skills push <dir> --dry-run       # Preview
 ```
 
+**Safety (0.5.0+):** `pull` never deletes a real directory, never overwrites a locally modified file, and never re-points a symlink that leads somewhere else — it reports a conflict and skips; `--force` overwrites after a backup. `push` skips files whose cloud copy is newer than the local file unless `--force`. `scan` writes nothing.
+
 **Scope behaviour:**
-- **Global (default):** writes to `~/.agents/skills/<name>/`, symlinks into `~/.claude/skills/`, `~/.windsurf/skills/`, `~/.augment/skills/` etc. for every agent installed on the system. Layout matches `npx skills` exactly — the two coexist without conflict.
-- **Project (`--project`):** same layout but relative to cwd (`.agents/skills/`, `.claude/skills/`, etc.). Use when skills should be scoped to a single project.
-- **Custom (`--dir <path>`):** writes files directly to `<path>/<name>/`, no symlinks. For manual control.
+- **Global (default):** writes to `~/.agents/skills/<name>/`, symlinks into `~/.claude/skills/` and the skill dirs of other installed agents. Layout matches `npx skills` — the two coexist.
+- **Project (`--project`):** same layout relative to cwd.
+- **Custom (`--dir <path>`):** writes files directly to `<path>/<name>/`, no symlinks.
 
 ---
 
